@@ -11,6 +11,7 @@ namespace API.Controllers
 
     public class ActivitiesController : BaseApiController
     {
+        //Activity CRUD Endpoints
 
         //Get all activities
         [HttpGet]
@@ -41,5 +42,11 @@ namespace API.Controllers
             return Ok(await Mediator.Send(new Edit.Command { Activity = activity }));
         }
 
+        //Remove activity associated with passed id
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActivity(Guid id)
+        {
+            return Ok(await Mediator.Send(new Delete.Command { Id = id }));
+        }
     }
 }
