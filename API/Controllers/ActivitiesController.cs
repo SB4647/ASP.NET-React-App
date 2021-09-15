@@ -19,18 +19,26 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
-        //Get an activity based on id 
+        //Get an activity associated with passed id 
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActvity(Guid id)
         {
             return await Mediator.Send(new Details.Query{ Id = id });
         }
 
-        //Create an activity sent in body
+        //Create the activity passed in body
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
             return Ok(await Mediator.Send(new Create.Command { Activity = activity }));
+        }
+
+        //Update activity associated with passed id with the Activity passed in body
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditActivity(Guid id, Activity activity)
+        {
+            activity.Id = id;
+            return Ok(await Mediator.Send(new Edit.Command { Activity = activity }));
         }
 
     }
