@@ -11,7 +11,6 @@ export default observer(function ActivityForm() {
     const history = useHistory();
     const { activityStore } = useStore();
     const {
-        selectedActivity,
         createActivity,
         updateActivity,
         loadActivity,
